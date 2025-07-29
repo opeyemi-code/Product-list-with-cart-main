@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primaryColorRed: hsl(14, 86%, 42%);
+  --primaryColorGreen: hsl(159, 69%, 38%);
+  --Rose-50: hsl(20, 50%, 98%);
+  --Rose-100: hsl(13, 31%, 94%);
+  --Rose-300: hsl(14, 25%, 72%);
+  --Rose-400: hsl(7, 20%, 60%);
+  --Rose-500: hsl(12, 20%, 44%);
+  --Rose-900: hsl(14, 65%, 9%);
+}
+
+@font-face {
+  font-family: "RedHat-Italic";
+  src: url("./assets/fonts/RedHatText-Italic-VariableFont_wght.ttf")
+    format("ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RedHat-Variable";
+  src: url("./assets/fonts/RedHatText-VariableFont_wght.ttf") format("ttf");
+  /* font-style: ; */
+}
+
+body {
+  font-family: "RedHat-Variable", sans-serif;
+  background-color: var(--Rose-100);
+}
+
+.product {
+  margin: 36px 16px 24px 16px;
+}
+
+.product__heading {
+  color: var(--Rose-900);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.product__item {
+  margin: 16px 0;
+  position: relative;
+}
+
+.product__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.product__category {
+  margin: 48px 0 10px 0;
+  color: var(--Rose-500);
+  font-weight: 400;
+}
+
+.product__name {
+  color: var(--Rose-900);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.product__price {
+  margin-bottom: 10px;
+  color: var(--primaryColorRed);
+  font-weight: 500;
+}
+
+.product__add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: var(--Rose-900);
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120px;
+  z-index: 1;
+  border-radius: 25px;
+  border: 1px solid var(--Rose-400);
+  padding: 10px 24px;
+}

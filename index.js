@@ -12,9 +12,10 @@ async function getData(url) {
 
 getData(url).then((data) => {
   console.log(data[0].image.mobile);
-  data.map((item) => {
+  data.map((item, index) => {
     const div = document.createElement("div");
     div.className = "product__item";
+    div.id = index;
     div.innerHTML = `
     <picture class="">
       <source media="(min-width: 1024px)" srcset="${item.image.desktop}">

@@ -11,7 +11,6 @@ async function getData(url) {
 }
 
 getData(url).then((data) => {
-  console.log(data[0].image.mobile);
   data.map((item, index) => {
     const div = document.createElement("div");
     div.className = "product__item";
@@ -28,13 +27,20 @@ getData(url).then((data) => {
     <h3 class="product__category">${item.category}</h3>
     <h2 class="product__name">${item.name}</h2>
     <p class="product__price">\$${Number(item.price).toFixed(2)}</p>
-    <button type="button" class="product__add-to-cart">
+    <button type="button" class="product__btn product__add-to-cart">
       <span class="cart-icon-wrapper">
       <img class="cart-icon" src="./assets/images/icon-add-to-cart.svg" alt="Cart">
       </span>
       Add to Cart
     </button>
+    <span class="product__counter product__btn">
+    <button class="decrement-btn counter-btn" type="button">-</button>
+    <span class="count">0</span>
+    <button class="increment-btn counter-btn" type="button">+</button>
+    </span>
   `;
     productList.appendChild(div);
   });
 });
+
+export default getData;

@@ -30,6 +30,7 @@
 body {
   font-family: "RedHat-Variable", sans-serif;
   background-color: var(--Rose-100);
+  color: var(--Rose-400);
 }
 
 .container {
@@ -93,7 +94,7 @@ body {
   color: var(--Rose-900);
   font-weight: 600;
   border-radius: 25px;
-  border: 1px solid var(--Rose-400);
+  /* border: 1px solid var(--Rose-400); */
   padding: 10px 24px;
 }
 
@@ -147,6 +148,85 @@ body {
   margin-bottom: 16px;
 }
 
+.cart__list {
+  list-style: none;
+  /* margin: 16px 0; */
+}
+
+.cart__item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--Rose-100);
+}
+
+.cart__item-name {
+  color: var(--Rose-900);
+  margin: 10px 0;
+}
+
+.cart__item-data {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart__item-quantity {
+  color: var(--primaryColorRed);
+  font-weight: 700;
+}
+
+.cart__item-price {
+  /* color: var(--Rose-400); */
+}
+
+.cart__item-total-price {
+  color: var(--Rose-900);
+  flex-grow: 1;
+  font-weight: 700;
+}
+
+.remove-item-btn {
+  background-color: transparent;
+  padding: 2px 5px;
+  border: 2px solid var(--Rose-400);
+  border-radius: 50%;
+}
+
+.cart__order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.cart__order-total {
+  color: var(--Rose-900);
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.cart__note {
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--Rose-50);
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+
+.cart__confirm-order-btn {
+  background-color: var(--primaryColorRed);
+  width: 100%;
+  color: var(--Rose-100);
+  font-weight: 700;
+  border: none;
+  padding: 24px 0;
+  margin-top: 16px;
+  border-radius: 36px;
+}
+
 @media (min-width: 468px) {
   .container {
     padding: 36px 10vh;
@@ -172,7 +252,7 @@ body {
   }
 
   .cart {
-    height: 18%;
+    height: 28%;
   }
 
   .product__add-to-cart {

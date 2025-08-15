@@ -90,7 +90,7 @@ getData(url).then((data) => {
       productItemElement.firstElementChild.lastElementChild.style.border =
         "red 2px solid";
       // Reload the cart section once a new item/update
-      filledCart();
+      updateCartDisplay();
     }
     displayQantityCounter(productItem);
   });
@@ -103,7 +103,6 @@ function displayUpdatedQuantity(e, parentId) {
 
   if (e.currentTarget.classList.contains("increment-btn") && updatedItem) {
     e.currentTarget.previousElementSibling.innerHTML = updatedItem.quantity;
-    console.log(updatedItem.id);
   } else {
     e.currentTarget.nextElementSibling.innerHTML = updatedItem.quantity;
   }
@@ -142,7 +141,7 @@ function increaseItemQuantity(e) {
   displayUpdatedQuantity(e, parentId);
 
   localStorage.setItem("cartItems", JSON.stringify(selectedItems));
-  filledCart();
+  updateCartDisplay();
 }
 
 function decreaseItemQuantity(e) {
@@ -180,7 +179,6 @@ function decreaseItemQuantity(e) {
   if (filterdItem.quantity < 1) {
     selectedItems.splice(selectedItems.indexOf(filterdItem));
     e.currentTarget.nextElementSibling.innerHTML = 1;
-    console.log(e.currentTarget.nextElementSibling);
     e.currentTarget.parentElement.style.display = "none";
     e.currentTarget.parentElement.previousElementSibling.style.display = "flex";
     e.currentTarget.parentElement.parentElement.firstElementChild.lastElementChild.removeAttribute(
@@ -189,7 +187,7 @@ function decreaseItemQuantity(e) {
   }
 
   localStorage.setItem("cartItems", JSON.stringify(selectedItems));
-  filledCart();
+  updateCartDisplay();
 }
 
 function emptyCart() {
@@ -214,6 +212,7 @@ function emptyCart() {
 function cartItem(cartList) {
   selectedItems.map((selectedItem) => {
     const cartItem = document.createElement("li");
+    cartItem.id = selectedItem.name;
     cartItem.classList.add("cart__item");
     cartItem.innerHTML = `
                 <h4 class="cart__item-name">${selectedItem.name}</h4>
@@ -229,8 +228,9 @@ function cartItem(cartList) {
                   <p class="cart__item-total-price">\$${eval(
                     selectedItem.price * selectedItem.quantity
                   ).toFixed(2)}</p>
-                  <button class="remove-item-btn" onclick=${"removeCartItem"}>
-                    <img
+                  <button class="remove-item-btn">
+                    <img 
+                    id="remove-item-btn"
                       class="icon-remove-item"
                       src="./assets/images/icon-remove-item.svg"
                       alt=""
@@ -240,8 +240,34 @@ function cartItem(cartList) {
     `;
     cartList.appendChild(cartItem);
 
+    cartItem.addEventListener("click", removeCartItem);
+
     function removeCartItem(e) {
-      console.log("hello");
+      if (e.target.id === "remove-item-btn") {
+        const matchedItem = selectedItems.find(
+          (item) => e.currentTarget.id === item.name
+        );
+        if (matchedItem) {
+          selectedItems.splice(selectedItems.indexOf(matchedItem), 1);
+          localStorage.setItem("cartItems", JSON.stringify(selectedItems));
+
+          // Also update the product display
+          const productItem = document.getElementById(matchedItem.id);
+          if (productItem) {
+            const addToCartBtn = productItem.querySelector(
+              ".product__add-to-cart"
+            );
+            const productCounter =
+              productItem.querySelector(".product__counter");
+            const productImage = productItem.querySelector("picture img");
+
+            if (addToCartBtn) addToCartBtn.style.display = "flex";
+            if (productCounter) productCounter.style.display = "none";
+            if (productImage) productImage.style.border = "";
+          }
+        }
+        updateCartDisplay();
+      }
     }
   });
 }
@@ -293,8 +319,6 @@ function filledCart() {
   cart.appendChild(cartOrderSection);
 }
 
-selectedItems.length > 0 ? filledCart() : emptyCart();
-
 function displayQantityCounter(productItem) {
   // Check if this product is in selectedItems
   const matchedItem = selectedItems.find(
@@ -321,3 +345,15 @@ function displayQantityCounter(productItem) {
     }
   }
 }
+
+function updateCartDisplay() {
+  cart.innerHTML = "";
+
+  if (selectedItems.length === 0) {
+    emptyCart();
+  } else {
+    filledCart();
+  }
+}
+
+updateCartDisplay();

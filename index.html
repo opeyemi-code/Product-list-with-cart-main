@@ -21,6 +21,23 @@
         <div class="product__list"></div>
       </div>
       <div class="cart"></div>
+      <dialog class="order-confirmation">
+        <img
+          class="checked-icon"
+          src="./assets/images/icon-order-confirmed.svg"
+          alt=""
+        />
+        <h2 class="order-confirmation__header">Order Confirmed</h2>
+        <p class="order-confirmation__message">We hope you enjoy your food!</p>
+        <div class="order-confirmation__body">
+          <ul class="order-confirmation__list"></ul>
+          <div class="order-confirmation__summary">
+            <h4 class="order-confirmation__summary-label">Order Total</h4>
+            <h4 class="order-confirmation__summary-value">$48</h4>
+          </div>
+        </div>
+        <button class="order-confirmation__button">Start New Order</button>
+      </dialog>
     </div>
     <script type="module" src="index.js"></script>
   </body>

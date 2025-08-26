@@ -1,7 +1,7 @@
 // ================== GLOBAL VARIABLES ==================
 const productList = document.querySelector(".product__list");
 const cart = document.querySelector(".cart");
-const dialogBox = document.querySelector("dialog");
+const dialog = document.querySelector("dialog");
 
 const orderConfirmationList = document.querySelector(
   ".order-confirmation__list"
@@ -60,7 +60,7 @@ getData(url).then((data) => {
     productCounter.classList = "product__counter product__btn";
 
     const decrementBtn = document.createElement("button");
-    decrementBtn.classList = "decrement-btn counter-btn";
+    decrementBtn.classList = "decrement-btn counter-btn counter-btn--hover";
     decrementBtn.innerHTML = `-`;
     productCounter.appendChild(decrementBtn);
 
@@ -70,7 +70,7 @@ getData(url).then((data) => {
     productCounter.appendChild(countElement);
 
     const incrementBtn = document.createElement("button");
-    incrementBtn.classList = "increment-btn counter-btn";
+    incrementBtn.classList = "increment-btn counter-btn counter-btn--hover";
     incrementBtn.innerHTML = `+`;
     productCounter.appendChild(incrementBtn);
 
@@ -140,7 +140,7 @@ function cartItem(cartList) {
           selectedItem.price * selectedItem.quantity
         ).toFixed(2)}</p>
         <button class="remove-item-btn">
-          <img id="remove-item-btn" class="icon-remove-item" src="./assets/images/icon-remove-item.svg" alt="" />
+          X
         </button>
       </div>
     `;
@@ -339,12 +339,12 @@ function orderConfirmed(e) {
       ).toFixed(2)}</p>`;
     orderConfirmationList.appendChild(listItem);
 
-    dialogBox.open = true;
+    dialog.showModal();
   });
 
   // For small screens, hide cart and products
   if (screen.width <= 468) {
-    dialogBox.setAttribute("open", "true");
+    dialog.showModal();
     cart.style.display = "none";
     productList.style.display = "none";
   }
@@ -371,12 +371,19 @@ function startNewOrder(e) {
     selectedProductItem.lastElementChild.style.display = "none";
   });
 
+  // Reset data
   selectedItems = [];
-  dialogBox.removeAttribute("open");
+  localStorage.setItem("cartItems", JSON.stringify(selectedItems));
+
+  // Reset UI
+  orderConfirmationList.innerHTML = "";
   cart.style.display = "block";
   productList.style.display = "grid";
   localStorage.setItem("cartItems", JSON.stringify(selectedItems));
   updateCartDisplay();
+
+  // Close Dialog
+  dialog.close();
 }
 
 // ================== EVENT LISTENERS ==================

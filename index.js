@@ -149,7 +149,8 @@ function cartItem(cartList) {
     // Remove item handler
     cartItem.addEventListener("click", removeCartItem);
     function removeCartItem(e) {
-      if (e.target.id === "remove-item-btn") {
+      console.log(e.target.classList.contains("remove-item-btn"));
+      if (e.target.classList.contains("remove-item-btn")) {
         const matchedItem = selectedItems.find(
           (item) => e.currentTarget.id === item.name
         );
